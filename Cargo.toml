@@ -1,0 +1,24 @@
+[package]
+name = "kz-auth"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+actix-web = { version = "4", features = ["openssl"] }
+actix-session = { version = "0.7", features = ["redis-rs-session"] }
+actix-identity = { version = "0.5" }
+openssl = { version = "0.10", features = ["v110"] }
+env_logger = "0.9.0"
+log = "0.4.17"
+serde = {version = "1.0", features = ["derive"]}
+serde_json = {version = "1.0", features = ["preserve_order"]}
+diesel = {version = "2.0.0-rc.0", features = ["postgres", "r2d2", "chrono"]}
+# diesel = {version = "2.0.0-rc.0", features = ["mysql", "r2d2", "chrono"]}
+lazy_static = "1.4.0"
+dotenv = "0.15.0"
+chrono = "0.4.19"
+fmt = "0.1.0"
+mime = "0.3.16"
+argon2 = "0.4.1"

@@ -1,0 +1,48 @@
+version: '3'
+
+services:
+  redis:
+    image: redis:latest
+    ports:
+      - "6379:6379"
+    volumes:
+      - ./redis-data:/data
+    environment:
+      - REDIS_PASSWORD=redis
+      - REDIS_PORT=6379
+      - REDIS_HOST=redis
+      - REDIS_DB=0
+    restart: always
+
+  database:
+    image: 'postgres:latest'
+    ports:
+      - 15432:5432
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: postgres
+    # env_file:
+      # - .env
+    networks:
+      - postgres-network
+    volumes:
+      - ./db-data/:/var/lib/postgresql/data/
+      # - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+  
+  # pgadmin:
+  #   image: dpage/pgadmin4
+  #   ports:
+  #     - 15433:80
+  #   env_file:
+  #     - .env
+  #   depends_on:
+  #     - database
+  #   networks:
+  #     - postgres-network
+  #   volumes:
+  #     - ./pgadmin-data/:/var/lib/pgadmin/
+
+networks: 
+  postgres-network:
+    driver: bridge
